@@ -10,9 +10,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       className={cn('mx-auto flex w-full flex-1 flex-col overflow-hidden  md:flex-row', 'h-screen')}
     >
       <LeftSidebar />
-      <div className="min-h-screen w-full">
+      <div className="min-h-screen w-full  flex flex-col items-center">
         <Navbar />
-        {children}
+        <div className="max-w-screen-2xl w-full">{children}</div>
       </div>
       <RightSidebar />
     </div>

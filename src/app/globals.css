@@ -163,7 +163,7 @@
   --secondary-foreground: #ffffff;
 
   --muted: #ffffff0d;
-  --muted-foreground: #1c1c1c66;
+  --muted-foreground: #ffffff66;
 
   --accent: #ffffff0d;
   --accent-foreground: #ffffff;
@@ -193,7 +193,7 @@
   --sidebar-ring: #ffffff1a;
 
   /* Cards */
-  --card: #ffffff0d; /* Primary/Light */
+  --card: #ffffff0d;  /* Primary/Light */
   --card-foreground: #ffffff;
 
   --card-customers: #e3f5ff; /* Primary/Blue */

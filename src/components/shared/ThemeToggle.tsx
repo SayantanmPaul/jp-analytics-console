@@ -45,7 +45,7 @@ const ThemeToggle = () => {
 
 export default ThemeToggle;
 
-// theme transition
+// start theme transition
 export function startThemeTransition(duration = 400) {
   const root = document.documentElement;
   root.classList.add('theme-transition');

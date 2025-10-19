@@ -1,11 +1,17 @@
 'use client';
 
+import KpiCardContainer from '@/components/dashboard/KpiCardContainer';
+import ProjectionsChartCard from '@/components/dashboard/ProjectionsChartCard';
+import DashboardHeader from '@/components/shared/Header';
 import { useContextStore } from '@/lib/store';
 import { useEffect } from 'react';
+import { useGetProjectionsBarChartData } from '../../../api/apiClient';
 
 const Dashboard = () => {
   const { setIsMobileView, isMobileView, setRightSidebarOpen, setLeftSidebarOpen } =
     useContextStore();
+
+  const { data: barChartData } = useGetProjectionsBarChartData();
 
   // handle viewport resize to set mobile view state
   useEffect(() => {
@@ -24,10 +30,12 @@ const Dashboard = () => {
   }, [isMobileView, setRightSidebarOpen, setLeftSidebarOpen]);
 
   return (
-    <div className=" flex flex-col items-center justify-center min-h-screen gap-4 w-full h-full">
-      <h1 className=" font-normal text-xl leading-5 space-y-3 font-inter">
-        Juspay Analytics Dashboard
-      </h1>
+    <div className=" flex flex-col items-start justify-start min-h-screen gap-4 w-full h-full p-7">
+      <DashboardHeader label="eCommerce" />
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-7 w-full ">
+        <KpiCardContainer />
+        <ProjectionsChartCard data={barChartData} />
+      </div>
     </div>
   );
 };

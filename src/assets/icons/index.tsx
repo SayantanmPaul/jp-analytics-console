@@ -1,5 +1,7 @@
 // dashboards icons
 import ArrowLineRight from './ArrowLineRight.svg';
+import ArrowRise from './ArrowRise.svg';
+
 import BookOpen from './dashboards/BookOpen.svg';
 import ChartPieSlice from './dashboards/ChartPieSlice.svg';
 import FolderNotch from './dashboards/FolderNotch.svg';
@@ -25,6 +27,8 @@ import Broadcast from './notifcation-category/Broadcast.svg';
 import BugBeetle from './notifcation-category/BugBeetle.svg';
 import User from './notifcation-category/User.svg';
 
+
+
 export const Icons = {
   bookOpen: BookOpen,
   chartPieSlice: ChartPieSlice,
@@ -48,4 +52,6 @@ export const Icons = {
   user: User,
   bugBeetle: BugBeetle,
   broadcast: Broadcast,
+
+  arrowRise: ArrowRise,
 };

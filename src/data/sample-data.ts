@@ -27,6 +27,21 @@ export interface User {
   avatar: string;
 }
 
+export interface KpiCardProps {
+  label: string;
+  value: number | string;
+  animationStartValue?: number;
+  decimalPlace?: number;
+  growth: number | string;
+  color?: string;
+}
+
+export interface ProjectionData {
+  month: string;
+  Projections: number;
+  Actuals: number;
+}
+
 export const sampleNotifications: NotificationsProps[] = [
   {
     category: 'bug',
@@ -85,4 +100,33 @@ export const sampleUsers: User[] = [
   { name: 'Andi Lane', avatar: User9.src },
   { name: 'Kate Morrison', avatar: User10.src },
   { name: 'Koray Okumus', avatar: User11.src },
+];
+
+export const sampleKPIs: KpiCardProps[] = [
+  {
+    label: 'Customers',
+    value: 3781,
+    animationStartValue: 3000,
+    growth: '+11.01%',
+    color: '#E3F5FF',
+  },
+  { label: 'Orders', value: 1219, animationStartValue: 1000, growth: '-0.03%' },
+  { label: 'Revenue', value: '$695', animationStartValue: 500, growth: '+15.03%' },
+  {
+    label: 'Growth',
+    value: '30.1%',
+    animationStartValue: 10.0,
+    decimalPlace: 1,
+    growth: '+6.08%',
+    color: '#E5ECF2',
+  },
+];
+
+export const projectionsBarChartData: ProjectionData[] = [
+  { month: 'January', Projections: 5, Actuals: 18 },
+  { month: 'February', Projections: 5, Actuals: 22 },
+  { month: 'March', Projections: 5, Actuals: 18 },
+  { month: 'April', Projections: 6, Actuals: 23 },
+  { month: 'May', Projections: 5, Actuals: 14 },
+  { month: 'June', Projections: 6, Actuals: 22 },
 ];
