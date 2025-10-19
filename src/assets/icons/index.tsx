@@ -20,6 +20,11 @@ import Sidebar from './navbar/Sidebar.svg';
 import Star from './navbar/Star.svg';
 import Sun from './navbar/Sun.svg';
 
+// notifications category icons
+import Broadcast from './notifcation-category/Broadcast.svg';
+import BugBeetle from './notifcation-category/BugBeetle.svg';
+import User from './notifcation-category/User.svg';
+
 export const Icons = {
   bookOpen: BookOpen,
   chartPieSlice: ChartPieSlice,
@@ -39,4 +44,8 @@ export const Icons = {
   sidebar: Sidebar,
   star: Star,
   sun: Sun,
+
+  user: User,
+  bugBeetle: BugBeetle,
+  broadcast: Broadcast,
 };

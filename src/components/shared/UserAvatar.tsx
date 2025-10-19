@@ -10,7 +10,7 @@ interface UserAvatarProps {
 }
 
 const UserAvatar = ({ user }: UserAvatarProps) => {
-  const fallbackName = user.name.slice(0, 1);
+  const fallbackName = user.name.slice(0, 2).toUpperCase();
   const imageUrl = typeof user.image === 'string' ? user.image : user.image.src;
 
   return (

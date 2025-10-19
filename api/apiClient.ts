@@ -16,7 +16,7 @@ export const useGetNotifications = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 300));
         setData(sampleNotifications);
       } catch (error) {
         console.error(error);
@@ -39,7 +39,7 @@ export const useGetUserActivities = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 700));
+        await new Promise((resolve) => setTimeout(resolve, 500));
         setData(sampleUserActivities);
       } catch (error) {
         console.error(error);
@@ -62,7 +62,7 @@ export const useGetUsers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 700));
         setData(sampleUsers);
       } catch (error) {
         console.error(error);

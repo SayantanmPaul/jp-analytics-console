@@ -60,6 +60,8 @@
   /* Cards */
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-card-customers: var(--color-card-customers);
+  --color-card-growth: var(--color-card-growth);
 
   /* Radius */
   --radius-sm: calc(var(--radius) - 4px);
