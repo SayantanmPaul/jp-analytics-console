@@ -1,5 +1,6 @@
 import LeftSidebar from '@/components/layout/left-sidebar/LeftSidebar';
 import Navbar from '@/components/layout/navigation/Navbar';
+import RightSidebar from '@/components/layout/right-sidebar/RightSidebar';
 import { cn } from '@/lib/utils';
 import React from 'react';
 
@@ -13,6 +14,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <Navbar />
         {children}
       </div>
+      <RightSidebar />
     </div>
   );
 }

@@ -220,6 +220,10 @@
   }
 }
 
+@utility no-scrollbar {
+  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+}
+
 .clip-path-container {
   position: absolute;
   z-index: 10;

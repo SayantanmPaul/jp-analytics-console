@@ -4,7 +4,8 @@ import { Icons } from '@/assets/icons';
 import ClientImage from '@/assets/images/users/client.png';
 import { Sidebar, SidebarBody } from '@/components/ui/sidebar';
 import TabsClipPath, { TabsProps } from '@/components/ui/tabsclip';
-import { useState } from 'react';
+import { useContextStore } from '@/lib/store';
+import { AnimatePresence, motion } from 'framer-motion';
 import UserAvatar from '../../shared/UserAvatar';
 import NavigationGroup, { NavigationGroupsProps } from './NavigationGroup';
 import SidebarGroupItems from './SidebarGroupItems';
@@ -71,12 +72,41 @@ const DASHBOARD_NAVIGATION: NavigationGroupsProps = {
       childOf: 'Dashboard',
       icon: <Icons.folderNotch className=" w-5 h-5 " />,
       routeHref: '#',
+      childRoutes: [
+        {
+          label: 'Overview',
+          childOf: 'Projects',
+          routeHref: '#',
+        },
+        {
+          label: 'Active',
+          childOf: 'Projects',
+          routeHref: '#',
+        },
+        {
+          label: 'Completed',
+          childOf: 'Projects',
+          routeHref: '#',
+        },
+      ],
     },
     {
       label: 'Online Courses',
       childOf: 'Dashboard',
       icon: <Icons.bookOpen className=" w-5 h-5 " />,
       routeHref: '#',
+      childRoutes: [
+        {
+          label: 'Overview',
+          childOf: 'Online Courses',
+          routeHref: '#',
+        },
+        {
+          label: 'My Courses',
+          childOf: 'Online Courses',
+          routeHref: '#',
+        },
+      ],
     },
   ],
 };
@@ -203,13 +233,34 @@ const PAGE_NAVIGATION: NavigationGroupsProps = {
 };
 
 const LeftSidebar = () => {
-  const [open, setOpen] = useState(true);
+  const { leftSidebarOpen, setLeftSidebarOpen } = useContextStore();
+
   return (
-    <Sidebar open={open} setOpen={() => setOpen(!open)}>
-      <SidebarBody className="justify-between" aria-label="left-rails-body">
-        <div className=" flex flex-col gap-4">
+    <Sidebar
+      open={leftSidebarOpen}
+      setOpen={() => setLeftSidebarOpen(!leftSidebarOpen)}
+      desktopOpenWidth={212}
+      desktopCloseWidth={64}
+      mobileOpenWidth={240}
+    >
+      <SidebarBody className="justify-between px-4 py-5" aria-label="left-rails-body">
+        <div className=" flex flex-col gap-4 overflow-x-hidden overflow-y-auto">
           <UserAvatar user={clientuser} />
-          <TabsClipPath TABS={TAB_OPTIONS} />
+          <AnimatePresence initial={false} mode="wait">
+            {leftSidebarOpen && (
+              <motion.div
+                key="tabs-clip"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.18, ease: 'easeOut' }}
+                className="overflow-hidden"
+              >
+                <TabsClipPath TABS={TAB_OPTIONS} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
           <NavigationGroup
             activeRouteLabel="Default"
             routes={DASHBOARD_NAVIGATION.routes}

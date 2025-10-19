@@ -38,7 +38,7 @@ const TabsClipPath = ({ TABS }: TabsProps) => {
   const activeContent = TABS.find((tab) => tab.name === activeTab)?.content;
 
   return (
-    <div role="navigation" className="space-y-1 pb-3">
+    <div role="tablist" aria-label="Tab navigation" className="space-y-1 pb-3">
       <div className=" relative w-fit flex flex-col items-center ">
         <ul className=" relative flex w-full justify-center gap-2">
           {TABS.map((tab) => (
@@ -49,6 +49,7 @@ const TabsClipPath = ({ TABS }: TabsProps) => {
                 onClick={() => {
                   setActiveTab(tab.name);
                 }}
+                role="tab"
                 className={cn(
                   'flex text-sm leading-5 text-black-20 py-1 px-2',
                   activeTab === tab.name && '',

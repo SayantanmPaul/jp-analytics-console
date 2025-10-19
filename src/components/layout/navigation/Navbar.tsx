@@ -1,5 +1,8 @@
+'use client';
+
 import { Icons } from '@/assets/icons';
 import { Button } from '@/components/ui/button';
+import { useContextStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import NavigationPath from './NavigationPath';
 import SearchBar from './SearchBar';
@@ -24,6 +27,12 @@ const Navbar = () => {
 export default Navbar;
 
 const LeftNavControls = () => {
+  const { leftSidebarOpen, setLeftSidebarOpen } = useContextStore();
+
+  const toggleSidebar = () => {
+    setLeftSidebarOpen(!leftSidebarOpen);
+  };
+
   return (
     <nav aria-label="Primary" className="flex space-x-2 items-center ">
       <span className="flex items-center gap-2">
@@ -34,6 +43,7 @@ const LeftNavControls = () => {
           className="w-7 h-7 cursor-pointer"
           aria-label="Toggle left sidebar"
           title="Toggle left sidebar"
+          onClick={toggleSidebar}
         >
           <Icons.sidebar className=" w-5 h-5 size-full " />
         </Button>
@@ -54,6 +64,11 @@ const LeftNavControls = () => {
 };
 
 const RightUtilityControls = () => {
+  const { rightSidebarOpen, setRightSidebarOpen } = useContextStore();
+
+  const toggleSidebar = () => {
+    setRightSidebarOpen(!rightSidebarOpen);
+  };
   return (
     <nav aria-label="Secondary" className="flex space-x-2 items-center">
       <SearchBar />
@@ -95,6 +110,7 @@ const RightUtilityControls = () => {
           className="w-7 h-7 cursor-pointer"
           aria-label="Toggle right sidebar"
           title="Toggle right sidebar"
+          onClick={toggleSidebar}
         >
           <Icons.sidebar className=" w-5 h-5 size-full text-black" />
         </Button>

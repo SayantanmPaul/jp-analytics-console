@@ -46,7 +46,7 @@ const SearchBar = () => {
           id="search-input"
           ref={inputRef}
           placeholder="Search"
-          type="search"
+          type="text"
           role="searchbox"
           aria-label="Search platform"
           className="w-24 placeholder:text-black-20 text-sm font-normal leading-5 selection:bg-black-40 selection:text-black"

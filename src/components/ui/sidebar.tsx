@@ -1,8 +1,10 @@
 'use client';
 
+import { Icons } from '@/assets/icons';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'motion/react';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { Button } from './button';
 
 interface Links {
   label: string;
@@ -10,10 +12,16 @@ interface Links {
   icon: React.JSX.Element | React.ReactNode;
 }
 
+type Side = 'left' | 'right';
+
 interface SidebarContextProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  side: Side;
   animate: boolean;
+  desktopOpenWidth: number;
+  desktopCloseWidth: number;
+  mobileOpenWidth: number;
 }
 
 const SidebarContext = createContext<SidebarContextProps | undefined>(undefined);
@@ -31,11 +39,19 @@ export const SidebarProvider = ({
   open: openProp,
   setOpen: setOpenProp,
   animate = true,
+  side,
+  desktopOpenWidth,
+  desktopCloseWidth = 0,
+  mobileOpenWidth,
 }: {
   children: React.ReactNode;
   open?: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   animate?: boolean;
+  side?: Side;
+  desktopOpenWidth: number;
+  desktopCloseWidth: number;
+  mobileOpenWidth: number;
 }) => {
   const [openState, setOpenState] = useState(false);
 
@@ -43,7 +59,17 @@ export const SidebarProvider = ({
   const setOpen = setOpenProp !== undefined ? setOpenProp : setOpenState;
 
   return (
-    <SidebarContext.Provider value={{ open, setOpen, animate: animate }}>
+    <SidebarContext.Provider
+      value={{
+        open,
+        setOpen,
+        animate: animate,
+        side: side || 'left',
+        desktopOpenWidth,
+        desktopCloseWidth,
+        mobileOpenWidth,
+      }}
+    >
       {children}
     </SidebarContext.Provider>
   );
@@ -54,14 +80,30 @@ export const Sidebar = ({
   open,
   setOpen,
   animate,
+  side,
+  desktopOpenWidth,
+  desktopCloseWidth,
+  mobileOpenWidth,
 }: {
   children: React.ReactNode;
   open?: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
   animate?: boolean;
+  side?: Side;
+  desktopOpenWidth: number;
+  desktopCloseWidth: number;
+  mobileOpenWidth: number;
 }) => {
   return (
-    <SidebarProvider open={open} setOpen={setOpen} animate={animate}>
+    <SidebarProvider
+      open={open}
+      setOpen={setOpen}
+      animate={animate}
+      side={side}
+      desktopOpenWidth={desktopOpenWidth}
+      desktopCloseWidth={desktopCloseWidth}
+      mobileOpenWidth={mobileOpenWidth}
+    >
       {children}
     </SidebarProvider>
   );
@@ -81,19 +123,32 @@ export const DesktopSidebar = ({
   children,
   ...props
 }: React.ComponentProps<typeof motion.div>) => {
-  const { open, animate } = useSidebar();
+  const { open, animate, side, desktopCloseWidth, desktopOpenWidth } = useSidebar();
+
+  const sideBorder = side === 'left' ? 'border-r' : 'border-l';
+  const sideOrder = side === 'right' ? 'md:order-last' : undefined;
+
   return (
     <>
       <motion.div
+        role="complementary"
+        data-side={side}
+        initial={false}
         className={cn(
-          'hidden h-full w-[212px] shrink-0 bg-sidebar pt-5 px-4 md:flex md:flex-col border-r border-sidebar-border',
+          'hidden h-full shrink-0 bg-sidebar md:flex md:flex-col',
+          sideBorder,
+          'border-sidebar-border',
+          sideOrder,
+          `w-[${desktopOpenWidth}px]`,
           className,
         )}
         animate={{
-          width: animate ? (open ? '212px' : '80px') : '212px',
+          width: animate
+            ? open
+              ? `${desktopOpenWidth}px`
+              : `${desktopCloseWidth}px`
+            : `${desktopOpenWidth}px`,
         }}
-        // onMouseEnter={() => setOpen(true)}
-        // onMouseLeave={() => setOpen(false)}
         {...props}
       >
         {children}
@@ -103,47 +158,80 @@ export const DesktopSidebar = ({
 };
 
 export const MobileSidebar = ({ className, children, ...props }: React.ComponentProps<'div'>) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { open, setOpen } = useSidebar();
+  const { open, setOpen, side, mobileOpenWidth } = useSidebar();
+
+  const initialX = side === 'left' ? '-100%' : '100%';
+  const exitX = initialX;
+
+  const sidePosition = side === 'left' ? 'left-0' : 'right-0';
+  const panelWidth = mobileOpenWidth ?? 280;
+
+  // Prevent body scroll when sidebar is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
   return (
-    <>
-      <div
-        className={cn(
-          'flex w-full flex-row items-center justify-between bg-neutral-100 md:hidden lg:h-10 lg:px-4 lg:py-4 dark:bg-neutral-800',
-        )}
-        {...props}
-      >
-        {/* <Button
-          variant="ghost"
-          onClick={() => setOpen(!open)}
-          className="absolute top-5 left-4 z-20 text-neutral-200"
-        >
-          <IconLayoutSidebarRightCollapseFilled
-            size={20}
-            className="min-h-6 min-w-6 text-neutral-800 dark:text-neutral-200"
-          />
-        </Button> */}
-        <AnimatePresence>
-          {open && (
+    <div
+      className={cn(
+        'md:hidden lg:h-10 lg:px-4 lg:py-4 relative bg-sidebar flex w-full items-center justify-between',
+      )}
+      {...props}
+    >
+      <AnimatePresence>
+        {open && (
+          <>
+            {/* Overlay */}
             <motion.div
-              initial={{ x: '-100%', opacity: 0 }}
+              key="overlay"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              onClick={() => setOpen(false)}
+              className="fixed inset-0 z-[90] bg-black/40 backdrop-blur-sm md:hidden"
+            />
+
+            {/* Drawer Panel */}
+            <motion.div
+              key={`drawer-${side}`}
+              initial={{ x: initialX, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '-100%', opacity: 0 }}
-              transition={{
-                duration: 0.3,
-                ease: 'easeInOut',
-              }}
+              exit={{ x: exitX, opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
               className={cn(
-                'fixed inset-0 z-[100] flex h-full w-full max-w-full flex-col justify-between bg-white px-6 py-4 dark:bg-neutral-900',
+                'fixed top-0 bottom-0 z-[100] flex h-full flex-col bg-sidebar px-6 py-4 shadow-lg',
+                sidePosition,
                 className,
               )}
+              style={{ width: `${panelWidth}px` }}
+              aria-label="mobile-sidebar"
+              role="dialog"
             >
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setOpen(false)}
+                className="w-7 h-7 cursor-pointer text-black-100 absolute right-4 top-5 z-50"
+                title="Close sidebar"
+              >
+                <Icons.sidebar className="w-5 h-5 size-full" />
+              </Button>
+
               {children}
             </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </>
+          </>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

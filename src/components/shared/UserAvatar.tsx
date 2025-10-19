@@ -19,7 +19,7 @@ const UserAvatar = ({ user }: UserAvatarProps) => {
         <AvatarImage src={imageUrl} alt={user.name} />
         <AvatarFallback>{fallbackName}</AvatarFallback>
       </Avatar>
-      <p className={cn('font-normal text-sm leading-5 ')}>{user.name}</p>
+      <p className={cn('font-normal text-sm leading-5 text-nowrap')}>{user.name}</p>
     </div>
   );
 };

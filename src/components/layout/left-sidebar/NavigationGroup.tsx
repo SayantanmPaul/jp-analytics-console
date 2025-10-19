@@ -5,7 +5,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { useContextStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useId, useState } from 'react';
 
@@ -35,11 +37,16 @@ const NavigationGroup = ({
   activeRouteLabel,
   defaultOpenRouteName,
 }: NavigationGroupsProps) => {
+  const { leftSidebarOpen } = useContextStore();
   return (
     <nav aria-label={title}>
       <div className="space-y-2">
         <div className="py-1 px-3">
-          <h3 className="text-black-40 text-sm leading-5 space-y-3 flex flex-1">{title}</h3>
+          <h3
+            className={`text-black-40 text-sm leading-5 space-y-3 flex flex-1 ${!leftSidebarOpen ? 'hidden' : 'block'} `}
+          >
+            {title}
+          </h3>
         </div>
         <Accordion type="single" collapsible className="w-full" defaultValue={defaultOpenRouteName}>
           <ul role="list" className="space-y-1">
@@ -70,12 +77,18 @@ const NavigationRoutes = ({
   childRoutes,
 }: NavigationRoutesProps) => {
   const [active, setActive] = useState<boolean>(false);
+  const { leftSidebarOpen, setLeftSidebarOpen } = useContextStore();
 
   const isLeafNode = !icon && !childRoutes?.length;
   const isActive = activeRouteLabel === label;
   const id = useId();
 
-  const handleClick = () => setActive((prev) => !prev);
+  const handleClick = () => {
+    if (!leftSidebarOpen) {
+      setLeftSidebarOpen(true);
+    }
+    setActive((prev) => !prev);
+  };
 
   if (isLeafNode && routeHref) {
     return (
@@ -83,13 +96,24 @@ const NavigationRoutes = ({
         href={routeHref}
         aria-current={isActive ? 'page' : undefined}
         className={cn(
-          `flex items-center space-x-1 py-1 px-2 rounded-md transition-colors cursor-pointer`,
-          isActive ? ' text-black-40' : ' text-black-100',
+          'flex items-center gap-2 py-1 px-2 rounded-md transition-colors cursor-pointer',
+          isActive ? 'text-black-40 bg-black-5' : 'text-black-100 hover:bg-black-5',
         )}
       >
         <span className="w-4 h-4" />
         <span className="w-5 h-5" />
-        <p className="text-sm leading-5">{label}</p>
+        <motion.p
+          className="text-sm leading-5 text-nowrap origin-left"
+          initial={false}
+          animate={{
+            opacity: leftSidebarOpen ? 1 : 0,
+            width: leftSidebarOpen ? 'auto' : 0,
+          }}
+          transition={{ duration: 0.16 }}
+          aria-hidden={!leftSidebarOpen}
+        >
+          {label}
+        </motion.p>
       </Link>
     );
   }
@@ -99,47 +123,73 @@ const NavigationRoutes = ({
       <AccordionTrigger
         onClick={handleClick}
         className={cn(
-          `flex space-x-1 flex-1 py-1 items-center ${isActive ? 'bg-black-5 rounded-md' : 'hover:bg-black-5 hover:rounded-md'} transition-colors duration-200`,
+          'flex items-center py-1 flex-1 transition-colors duration-200 rounded-md',
+          isActive ? 'bg-black-5' : 'hover:bg-black-5',
+          !leftSidebarOpen ? 'gap-0 justify-center' : 'gap-2 justify-start',
         )}
       >
-        <span className="pl-2 relative" aria-hidden="true">
+        <span className="pl-2 relative flex items-center" aria-hidden="true">
           {/* active tab indicator */}
           <span
             className={cn(
-              `w-1 h-4 rounded-full bg-foreground absolute left-0 ${isActive ? 'opacity-100' : 'opacity-0'}`,
+              `w-1 h-4 rounded-full bg-foreground absolute left-0 ${!leftSidebarOpen && !isActive && 'hidden'} ${isActive ? 'opacity-100' : 'opacity-0'}`,
             )}
           />
-          <Icons.arrowLineRight
-            aria-hidden="true"
-            className={cn(
-              `w-4 h-4 translate-y-0.5 transition-transform duration-200 ${active ? 'rotate-90' : ''} ${isActive || !icon ? 'opacity-0' : 'opacity-100'}`,
-            )}
-          />
+          {leftSidebarOpen && (
+            <Icons.arrowLineRight
+              aria-hidden="true"
+              className={cn(
+                `w-4 h-4 translate-y-0.5 transition-transform duration-200 mb-1  ${active ? 'rotate-90' : ''} ${isActive ? 'opacity-0' : 'opacity-100'} `,
+              )}
+            />
+          )}
         </span>
 
         {/* icon and label */}
-        <span className="flex gap-1 text-black-100 font-normal">
-          {icon ? (
-            <span aria-hidden="true" className="w-5 h-5">
+        <span
+          className={cn(
+            'flex items-center gap-2 text-black-100 font-normal transition-all duration-300 flex-1 min-w-0',
+            !leftSidebarOpen && 'gap-0',
+          )}
+        >
+          {icon && (
+            <span aria-hidden="true" className="w-5 h-5 shrink-0">
               {icon}
             </span>
-          ) : (
-            <span className="w-5 h-5" aria-hidden="true" />
           )}
-          <p className="text-sm leading-5 space-y-3">{label}</p>
+          <motion.p
+            className="text-sm leading-5 text-nowrap truncate origin-left"
+            initial={false}
+            animate={{
+              opacity: leftSidebarOpen ? 1 : 0,
+              width: leftSidebarOpen ? 'auto' : 0,
+            }}
+            transition={{ duration: 0.16 }}
+            aria-hidden={!leftSidebarOpen}
+          >
+            {label}
+          </motion.p>
         </span>
       </AccordionTrigger>
 
       {/* child routes */}
-      {childRoutes && childRoutes.length > 0 && (
-        <AccordionContent className="pt-1" asChild>
-          <ul className="space-y-1">
+      {childRoutes && childRoutes.length > 0 && leftSidebarOpen && (
+        <AccordionContent asChild className="pt-1 data-[state=closed]:overflow-hidden">
+          <motion.ul
+            initial={false}
+            animate={{
+              height: leftSidebarOpen ? 'auto' : 0,
+              opacity: leftSidebarOpen ? 1 : 0,
+            }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
+            className="space-y-1"
+          >
             {childRoutes.map((route, i) => (
               <li key={`${id ?? label}::${route.label}`}>
                 <NavigationRoutes key={i} childRoutes={route.childRoutes} {...route} />
               </li>
             ))}
-          </ul>
+          </motion.ul>
         </AccordionContent>
       )}
     </AccordionItem>
