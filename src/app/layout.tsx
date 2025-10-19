@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@/components/theme-provider';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import './globals.css';
@@ -13,8 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn('bg-background text-foreground font-inter')}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn('bg-background text-foreground font-inter min-h-screen antialiased')}>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

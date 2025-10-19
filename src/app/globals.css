@@ -203,12 +203,12 @@
   --popover: #ffffff0d; /* Primary/Light */
   --popover-foreground: #ffffff; /* Brand */
 
-  --black: #1c1c1c;
-  --black-100: #1c1c1c;
-  --black-40: #ffffff66;
-  --black-20: #ffffff33;
-  --black-10: #ffffff1a;
-  --black-5: #ffffff1a;
+  --black: #f3f3f3;
+  --black-100: #f3f3f3;
+  --black-40: #d2d2d2;
+  --black-20: #a4a4a4;
+  --black-10: #494949;
+  --black-5: #262626;
 }
 
 @layer base {
@@ -218,6 +218,29 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/*theme switch transition*/
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition-property: color, background-color, border-color, fill, stroke;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+@keyframes rotate-once {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+.rotate-once {
+  animation: rotate-once 0.4s ease-in-out;
 }
 
 @utility no-scrollbar {

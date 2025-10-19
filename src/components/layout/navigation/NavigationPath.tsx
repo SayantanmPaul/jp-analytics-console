@@ -46,7 +46,7 @@ const NavigationPath = () => {
           <React.Fragment key={i}>
             <BreadcrumbItem
               className={cn(
-                `text-sm leading-5 font-normal px-2 py-1 ${item.href === currentPath ? 'text-black-100' : 'text-black-40'}`,
+                `text-sm leading-5 font-normal px-2 py-1 ${item.href === currentPath ? 'text-black-100' : 'text-black-40 dark:text-black-20'}`,
               )}
               aria-current={item.href === currentPath ? 'page' : undefined}
             >

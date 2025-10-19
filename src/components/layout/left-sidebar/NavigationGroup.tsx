@@ -40,10 +40,10 @@ const NavigationGroup = ({
   const { leftSidebarOpen } = useContextStore();
   return (
     <nav aria-label={title}>
-      <div className="space-y-2">
+      <div className="space-y-1 pb-3">
         <div className="py-1 px-3">
           <h3
-            className={`text-black-40 text-sm leading-5 space-y-3 flex flex-1 ${!leftSidebarOpen ? 'hidden' : 'block'} `}
+            className={`text-black-40 text-sm leading-5 space-y-3 font-normal flex flex-1 ${!leftSidebarOpen ? 'hidden' : 'block'} `}
           >
             {title}
           </h3>
@@ -97,7 +97,9 @@ const NavigationRoutes = ({
         aria-current={isActive ? 'page' : undefined}
         className={cn(
           'flex items-center gap-2 py-1 px-2 rounded-md transition-colors cursor-pointer',
-          isActive ? 'text-black-40 bg-black-5' : 'text-black-100 hover:bg-black-5',
+          isActive
+            ? 'text-black-40 bg-black-5 dark:bg-black-5'
+            : 'text-black-100 hover:bg-black-5 hover:dark:bg-black-5',
         )}
       >
         <span className="w-4 h-4" />
@@ -124,7 +126,7 @@ const NavigationRoutes = ({
         onClick={handleClick}
         className={cn(
           'flex items-center py-1 flex-1 transition-colors duration-200 rounded-md',
-          isActive ? 'bg-black-5' : 'hover:bg-black-5',
+          isActive ? 'bg-black-5 dark:bg-black-5' : 'hover:bg-black-5 hover:dark:bg-black-5',
           !leftSidebarOpen ? 'gap-0 justify-center' : 'gap-2 justify-start',
         )}
       >

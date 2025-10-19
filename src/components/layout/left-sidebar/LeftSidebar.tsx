@@ -41,7 +41,7 @@ const TAB_OPTIONS: TabsProps['TABS'] = [
 ];
 
 const DASHBOARD_NAVIGATION: NavigationGroupsProps = {
-  title: 'Dashboard',
+  title: 'Dashboards',
   routes: [
     {
       label: 'Default',

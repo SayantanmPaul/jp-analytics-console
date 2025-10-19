@@ -42,15 +42,15 @@ const NotificationCard = ({ category, timeStamp, title }: NotificationsProps) =>
       className="p-1 flex space-x-2 items-start max-w-56 w-full group "
     >
       <span
-        className="max-w-6 max-h-6 size-full bg-[#E3F5FF] group-hover:bg-[#a8c5da]/40 rounded-sm flex items-center justify-center duration-200 ease-in-out "
+        className="max-w-6 max-h-6 size-full bg-[#E3F5FF] group-hover:bg-[#a8c5da]/40 dark:group-hover:bg-[#a8c5da] rounded-sm flex items-center justify-center duration-200 ease-in-out "
         aria-hidden="true"
       >
         {category === 'bug' ? (
-          <Icons.bugBeetle className="w-4 h-4 size-full text-black" />
+          <Icons.bugBeetle className="w-4 h-4 size-full text-black dark:text-primary-foreground" />
         ) : category === 'user' ? (
-          <Icons.user className="w-4 h-4 size-full text-black" />
+          <Icons.user className="w-4 h-4 size-full text-black dark:text-primary-foreground" />
         ) : (
-          <Icons.broadcast className="w-4 h-4 size-full text-black" />
+          <Icons.broadcast className="w-4 h-4 size-full text-black dark:text-primary-foreground" />
         )}
       </span>
       <div className="space-y-0 overflow-hidden flex flex-col h-[38px]">

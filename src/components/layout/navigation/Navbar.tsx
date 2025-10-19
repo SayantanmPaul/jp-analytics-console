@@ -1,6 +1,7 @@
 'use client';
 
 import { Icons } from '@/assets/icons';
+import ThemeToggle from '@/components/shared/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { useContextStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
@@ -70,19 +71,10 @@ const RightUtilityControls = () => {
     setRightSidebarOpen(!rightSidebarOpen);
   };
   return (
-    <nav aria-label="Secondary" className="flex space-x-2 items-center">
+    <nav aria-label="Secondary" className="flex space-x-5 items-center">
       <SearchBar />
       <span className="flex items-center gap-2 ">
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          className="w-7 h-7 cursor-pointer"
-          aria-label="Toggle theme"
-          title="Toggle theme"
-        >
-          <Icons.sun className=" w-5 h-5 size-full text-black" />
-        </Button>
+        <ThemeToggle />
         <Button
           type="button"
           variant="ghost"
