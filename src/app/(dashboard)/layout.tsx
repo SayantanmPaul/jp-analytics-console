@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <LeftSidebar />
       <div className="min-h-screen w-full  flex flex-col items-center">
         <Navbar />
-        <div className="max-w-screen-2xl w-full">{children}</div>
+        <div className="max-w-screen-2xl w-full overflow-y-scroll no-scrollbar">{children}</div>
       </div>
       <RightSidebar />
     </div>

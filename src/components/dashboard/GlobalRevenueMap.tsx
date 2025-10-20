@@ -10,7 +10,7 @@ const GlobalRevenueMap = () => {
   const { data: sampleCityRevenue, loading } = useGetCityRevenueData();
   return (
     <figure
-      className="flex flex-col space-y-4 lg:p-6 p-4 rounded-lg bg-card w-full h-fit"
+      className="flex flex-col space-y-4 lg:p-6 p-4 rounded-lg bg-card w-full"
       aria-labelledby="revenue-map-heading"
     >
       <h3
@@ -80,7 +80,7 @@ const GlobalRevenueMap = () => {
                 <Skeleton className="w-1/3 h-3" />
                 <Skeleton className="w-6 h-3" />
               </div>
-              <Skeleton className="w-full h-1" />
+              <Skeleton className="w-full h-0.5" />
             </div>
           ))
         : sampleCityRevenue.map((item) => (
@@ -99,7 +99,11 @@ const CityRevenue = ({ city, revenue }: { city: string; revenue: number }) => {
         {city}
         <p>{revenue}K</p>
       </span>
-      <Progress value={revenue} className="w-full h-0.5" aria-label={`Revenue progress ${city}`} />
+      <Progress
+        value={revenue}
+        className="w-full h-0.5 flex-shrink-0"
+        aria-label={`Revenue progress ${city}`}
+      />
     </div>
   );
 };

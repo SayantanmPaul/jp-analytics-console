@@ -9,8 +9,10 @@ import {
   sampleKPIs,
   sampleNotifications,
   sampleRevenuueData,
+  sampleTopProducts,
   sampleUserActivities,
   sampleUsers,
+  TopProductsProps,
   User,
   UserActivitiesProps,
 } from '@/data/sample-data';
@@ -163,6 +165,27 @@ export const useGetCityRevenueData = () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 350));
         setData(sampleCityRevenue);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { loading, data };
+};
+
+export const useGetTopProductsList = () => {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<TopProductsProps[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        setData(sampleTopProducts);
       } catch (error) {
         console.error(error);
       } finally {

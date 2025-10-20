@@ -62,6 +62,12 @@ export interface CityRevenueData {
   coordinates: [number, number];
 }
 
+export interface TopProductsProps {
+  product_name: string;
+  price: number;
+  quantity: number;
+  amount: number;
+}
 
 export const sampleNotifications: NotificationsProps[] = [
   {
@@ -165,10 +171,17 @@ export const sampleRevenuueData: LineChartData = {
   ],
 };
 
-
 export const sampleCityRevenue: CityRevenueData[] = [
   { city: 'New York', revenue: 72, coordinates: [-74.006, 40.7128] },
   { city: 'San Francisco', revenue: 39, coordinates: [-122.4194, 37.7749] },
   { city: 'Sydney', revenue: 25, coordinates: [151.2093, -33.8688] },
   { city: 'Singapore', revenue: 61, coordinates: [103.8198, 1.3521] },
+];
+
+export const sampleTopProducts: TopProductsProps[] = [
+  { product_name: 'ASOS Ridley High Waist', price: 79.49, quantity: 82, amount: 6518.18 },
+  { product_name: 'Marco Lightweight Shirt', price: 128.5, quantity: 37, amount: 4754.5 },
+  { product_name: 'Half Sleeve  Shirt', price: 39.99, quantity: 64, amount: 2559.36 },
+  { product_name: 'Lightweight Jacket', price: 20.0, quantity: 184, amount: 3680.0 },
+  { product_name: 'Marco Shoes', price: 79.49, quantity: 64, amount: 1965.81 },
 ];
