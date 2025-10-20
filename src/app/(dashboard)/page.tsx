@@ -1,5 +1,6 @@
 'use client';
 
+import GlobalRevenueMap from '@/components/dashboard/GlobalRevenueMap';
 import KpiCardContainer from '@/components/dashboard/KpiCardContainer';
 import ProjectionsChartCard from '@/components/dashboard/ProjectionsChartCard';
 import RevenueForecastChart from '@/components/dashboard/RevenueChart';
@@ -31,15 +32,20 @@ const Dashboard = () => {
   }, [isMobileView, setRightSidebarOpen, setLeftSidebarOpen]);
 
   return (
-    <div className=" flex flex-col items-start justify-start min-h-screen gap-4 w-full h-full p-7">
+    <div className="flex flex-col items-start justify-start min-h-screen gap-4 w-full h-full p-7">
       <DashboardHeader label="eCommerce" />
-      <div className="grid lg:grid-cols-2 grid-cols-1 gap-7 w-full ">
-        <KpiCardContainer />
-        <ProjectionsChartCard data={barChartData} />
-        <div className="">
+
+      <div className="grid grid-cols-1 gap-7 w-full lg:grid-cols-4">
+        <div className="lg:col-span-2">
+          <KpiCardContainer />
+        </div>
+        <div className="lg:col-span-2">
+          <ProjectionsChartCard data={barChartData} />
+        </div>
+        <div className="lg:col-span-3">
           <RevenueForecastChart />
         </div>
-        {/* <AnimatedHatchedPatternAreaChart/> */}
+        <GlobalRevenueMap />
       </div>
     </div>
   );

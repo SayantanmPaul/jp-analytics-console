@@ -56,6 +56,13 @@ export interface LineChartData {
   data: ProjectionLineChartData[];
 }
 
+export interface CityRevenueData {
+  city: string;
+  revenue: number;
+  coordinates: [number, number];
+}
+
+
 export const sampleNotifications: NotificationsProps[] = [
   {
     category: 'bug',
@@ -157,3 +164,11 @@ export const sampleRevenuueData: LineChartData = {
     { month: 'June', projection: 24, _areaFill: 24, actual: null, actualDotted: 21 },
   ],
 };
+
+
+export const sampleCityRevenue: CityRevenueData[] = [
+  { city: 'New York', revenue: 72, coordinates: [-74.006, 40.7128] },
+  { city: 'San Francisco', revenue: 39, coordinates: [-122.4194, 37.7749] },
+  { city: 'Sydney', revenue: 25, coordinates: [151.2093, -33.8688] },
+  { city: 'Singapore', revenue: 61, coordinates: [103.8198, 1.3521] },
+];

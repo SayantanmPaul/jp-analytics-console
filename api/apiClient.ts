@@ -1,9 +1,11 @@
 import {
+  CityRevenueData,
   KpiCardProps,
   LineChartData,
   NotificationsProps,
   ProjectionData,
   projectionsBarChartData,
+  sampleCityRevenue,
   sampleKPIs,
   sampleNotifications,
   sampleRevenuueData,
@@ -137,8 +139,30 @@ export const useSampleReveneueLineChartData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        await new Promise((resolve) => setTimeout(resolve, 400));
         setData(sampleRevenuueData);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { loading, data };
+};
+
+// mock data simulation for city revenue data
+export const useGetCityRevenueData = () => {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<CityRevenueData[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 350));
+        setData(sampleCityRevenue);
       } catch (error) {
         console.error(error);
       } finally {
