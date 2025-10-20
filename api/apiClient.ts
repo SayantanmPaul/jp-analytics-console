@@ -1,10 +1,12 @@
 import {
   KpiCardProps,
+  LineChartData,
   NotificationsProps,
   ProjectionData,
   projectionsBarChartData,
   sampleKPIs,
   sampleNotifications,
+  sampleRevenuueData,
   sampleUserActivities,
   sampleUsers,
   User,
@@ -114,6 +116,29 @@ export const useGetSampleKPIs = () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 200));
         setData(sampleKPIs);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { loading, data };
+};
+
+// mock data simulation for revenue line chart
+export const useSampleReveneueLineChartData = () => {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<LineChartData>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        setData(sampleRevenuueData);
       } catch (error) {
         console.error(error);
       } finally {

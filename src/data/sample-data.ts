@@ -42,6 +42,20 @@ export interface ProjectionData {
   Actuals: number;
 }
 
+export interface ProjectionLineChartData {
+  month: string;
+  projection: number | null;
+  _areaFill: number | null;
+  actual: number | null;
+  actualDotted: number | null;
+}
+
+export interface LineChartData {
+  currentWeekRevenueAmount: string;
+  previousWeekRevenueAmount: string;
+  data: ProjectionLineChartData[];
+}
+
 export const sampleNotifications: NotificationsProps[] = [
   {
     category: 'bug',
@@ -130,3 +144,16 @@ export const projectionsBarChartData: ProjectionData[] = [
   { month: 'May', Projections: 5, Actuals: 14 },
   { month: 'June', Projections: 6, Actuals: 22 },
 ];
+
+export const sampleRevenuueData: LineChartData = {
+  currentWeekRevenueAmount: '$58,211',
+  previousWeekRevenueAmount: '$68,768',
+  data: [
+    { month: 'January', projection: 10, _areaFill: 10, actual: 17, actualDotted: null },
+    { month: 'February', projection: 18, _areaFill: 18, actual: 11, actualDotted: null },
+    { month: 'March', projection: 16, _areaFill: 16, actual: 12, actualDotted: null },
+    { month: 'April', projection: 12, _areaFill: 12, actual: 17, actualDotted: 17 },
+    { month: 'May', projection: 14, _areaFill: 14, actual: null, actualDotted: 21 },
+    { month: 'June', projection: 24, _areaFill: 24, actual: null, actualDotted: 21 },
+  ],
+};

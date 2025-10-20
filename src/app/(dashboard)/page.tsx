@@ -2,6 +2,7 @@
 
 import KpiCardContainer from '@/components/dashboard/KpiCardContainer';
 import ProjectionsChartCard from '@/components/dashboard/ProjectionsChartCard';
+import RevenueForecastChart from '@/components/dashboard/RevenueChart';
 import DashboardHeader from '@/components/shared/Header';
 import { useContextStore } from '@/lib/store';
 import { useEffect } from 'react';
@@ -35,6 +36,10 @@ const Dashboard = () => {
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-7 w-full ">
         <KpiCardContainer />
         <ProjectionsChartCard data={barChartData} />
+        <div className="">
+          <RevenueForecastChart />
+        </div>
+        {/* <AnimatedHatchedPatternAreaChart/> */}
       </div>
     </div>
   );
