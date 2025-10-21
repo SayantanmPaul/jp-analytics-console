@@ -25,7 +25,7 @@ const GlobalRevenueMap = () => {
         </div>
       ) : (
         <ComposableMap
-          className="w-auto h-22"
+          className="w-auto h-[82px]"
           projection="geoMercator"
           projectionConfig={{ scale: 200, center: [0, 36] }}
           aria-label="World map with revenue"

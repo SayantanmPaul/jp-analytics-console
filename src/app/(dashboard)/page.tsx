@@ -5,6 +5,7 @@ import KpiCardContainer from '@/components/dashboard/KpiCardContainer';
 import ProjectionsChartCard from '@/components/dashboard/ProjectionsChartCard';
 import RevenueForecastChart from '@/components/dashboard/RevenueChart';
 import TopSellingProductsTable from '@/components/dashboard/TopSellingProductsTable';
+import TotalSalesCard from '@/components/dashboard/TotalSalesCard';
 import DashboardHeader from '@/components/shared/Header';
 import { useContextStore } from '@/lib/store';
 import { useEffect } from 'react';
@@ -50,6 +51,7 @@ const Dashboard = () => {
         <div className="lg:col-span-3">
           <TopSellingProductsTable />
         </div>
+        <TotalSalesCard />
       </div>
     </div>
   );

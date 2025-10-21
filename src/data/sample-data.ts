@@ -69,6 +69,12 @@ export interface TopProductsProps {
   amount: number;
 }
 
+export interface TotalSalesProps {
+  name: string;
+  value: number;
+  fill: string;
+}
+
 export const sampleNotifications: NotificationsProps[] = [
   {
     category: 'bug',
@@ -184,4 +190,27 @@ export const sampleTopProducts: TopProductsProps[] = [
   { product_name: 'Half Sleeve  Shirt', price: 39.99, quantity: 64, amount: 2559.36 },
   { product_name: 'Lightweight Jacket', price: 20.0, quantity: 184, amount: 3680.0 },
   { product_name: 'Marco Shoes', price: 79.49, quantity: 64, amount: 1965.81 },
+];
+
+export const sampleTotalSales: TotalSalesProps[] = [
+  {
+    name: 'Direct',
+    value: 300.56,
+    fill: 'var(--chart-1)',
+  },
+  {
+    name: 'Affilliate',
+    value: 135.18,
+    fill: 'var(--chart-4)',
+  },
+  {
+    name: 'E-mail',
+    value: 48.96,
+    fill: 'var(--chart-3)',
+  },
+  {
+    name: 'Sponsored',
+    value: 154.02,
+    fill: 'var(--chart-2)',
+  },
 ];

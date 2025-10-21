@@ -10,9 +10,11 @@ import {
   sampleNotifications,
   sampleRevenuueData,
   sampleTopProducts,
+  sampleTotalSales,
   sampleUserActivities,
   sampleUsers,
   TopProductsProps,
+  TotalSalesProps,
   User,
   UserActivitiesProps,
 } from '@/data/sample-data';
@@ -178,6 +180,7 @@ export const useGetCityRevenueData = () => {
   return { loading, data };
 };
 
+// mock data simulation for top products
 export const useGetTopProductsList = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<TopProductsProps[]>([]);
@@ -186,6 +189,28 @@ export const useGetTopProductsList = () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 500));
         setData(sampleTopProducts);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { loading, data };
+};
+
+// mock data simulation for total sales
+export const useGetTotalSales = () => {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<TotalSalesProps[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 550));
+        setData(sampleTotalSales);
       } catch (error) {
         console.error(error);
       } finally {
