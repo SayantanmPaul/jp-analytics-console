@@ -129,31 +129,29 @@ export const DesktopSidebar = ({
   const sideOrder = side === 'right' ? 'md:order-last' : undefined;
 
   return (
-    <>
-      <motion.div
-        role="complementary"
-        data-side={side}
-        initial={false}
-        className={cn(
-          'hidden h-full shrink-0 bg-sidebar md:flex md:flex-col',
-          sideBorder,
-          'border-sidebar-border',
-          sideOrder,
-          `w-[${desktopOpenWidth}px]`,
-          className,
-        )}
-        animate={{
-          width: animate
-            ? open
-              ? `${desktopOpenWidth}px`
-              : `${desktopCloseWidth}px`
-            : `${desktopOpenWidth}px`,
-        }}
-        {...props}
-      >
-        {children}
-      </motion.div>
-    </>
+    <motion.div
+      role="complementary"
+      data-side={side}
+      initial={false}
+      className={cn(
+        'hidden h-full shrink-0 bg-sidebar lg:flex lg:flex-col w-full',
+        sideBorder,
+        'border-sidebar-border',
+        sideOrder,
+        className,
+      )}
+      animate={{
+        width: animate
+          ? open
+            ? `${desktopOpenWidth}px`
+            : `${desktopCloseWidth}px`
+          : `${desktopOpenWidth}px`,
+      }}
+      style={{ width: open ? desktopOpenWidth : desktopCloseWidth }}
+      {...props}
+    >
+      {children}
+    </motion.div>
   );
 };
 
@@ -181,9 +179,7 @@ export const MobileSidebar = ({ className, children, ...props }: React.Component
 
   return (
     <div
-      className={cn(
-        'md:hidden lg:h-10 lg:px-4 lg:py-4 relative bg-sidebar flex w-full items-center justify-between',
-      )}
+      className={cn('lg:hidden relative flex items-center justify-between', 'bg-sidebar', 'h-14')}
       {...props}
     >
       <AnimatePresence>
@@ -197,7 +193,7 @@ export const MobileSidebar = ({ className, children, ...props }: React.Component
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-[90] bg-black/40 backdrop-blur-sm md:hidden"
+              className="fixed inset-0 z-[90] bg-black-5/40 backdrop-blur-md lg:hidden"
             />
 
             {/* Drawer Panel */}
