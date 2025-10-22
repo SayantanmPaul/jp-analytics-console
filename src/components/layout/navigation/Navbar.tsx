@@ -72,7 +72,7 @@ const RightUtilityControls = () => {
   };
   return (
     <nav aria-label="Secondary" className="flex space-x-5 items-center">
-      <SearchBar />
+      <SearchBar initialValue="" onSearchChange={() => {}} shortcutKey="cmd+/" />
       <span className="flex items-center gap-2 ">
         <ThemeToggle />
         <Button

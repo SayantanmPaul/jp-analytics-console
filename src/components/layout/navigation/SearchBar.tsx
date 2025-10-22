@@ -7,38 +7,68 @@ import {
   InputGroupInput,
   InputGroupText,
 } from '@/components/ui/input-group';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-const SearchBar = () => {
+interface SearchInputProps {
+  initialValue: string;
+  onSearchChange: (value: string) => void;
+  shortcutKey?: string;
+  containerClass?: string;
+}
+
+const SearchBar = ({
+  initialValue,
+  onSearchChange,
+  shortcutKey,
+  containerClass,
+}: SearchInputProps) => {
+  const [searchValue, setSearchValue] = useState(initialValue);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    onSearchChange(searchValue);
+  }, [searchValue, onSearchChange]);
 
   // focus search bar when ctrl/cmd + / is pressed
   useEffect(() => {
+    if (!shortcutKey) return;
+
+    const [mod, key] = shortcutKey.toLowerCase().split('+');
+    const isCmd = mod === 'cmd' || mod === 'meta';
+    const isCtrl = mod === 'ctrl';
+
     const handleKeyDown = (event: KeyboardEvent) => {
-      if ((event.metaKey || event.ctrlKey) && event.key === '/') {
+      const matchesShortcut =
+        ((isCmd && event.metaKey) || (isCtrl && event.ctrlKey)) && event.key.toLowerCase() === key;
+
+      if (matchesShortcut) {
         event.preventDefault();
         inputRef.current?.focus();
       }
 
-      if (event.key === 'Escape') {
-        if (document.activeElement === inputRef.current) {
-          inputRef?.current?.blur();
-        }
+      if (event.key === 'Escape' && document.activeElement === inputRef.current) {
+        inputRef?.current?.blur();
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [shortcutKey]);
+
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
   }, []);
 
   return (
     <form
       role="search"
       aria-label="Platform search"
-      className="w-[160px]"
+      className="w-40"
       onSubmit={(e) => e.preventDefault()}
     >
-      <InputGroup className="w-full h-7 bg-black-5 rounded-md border border-transparent focus-within:border-black-10 duration-200 ease-in-out">
+      <InputGroup
+        className={`w-full h-7 bg-black-5 rounded-md border border-transparent duration-200 ease-in-out ${containerClass}`}
+      >
         <label htmlFor="search-input" className="sr-only">
           Search
         </label>
@@ -48,20 +78,27 @@ const SearchBar = () => {
           placeholder="Search"
           type="text"
           role="searchbox"
+          onChange={handleChange}
           aria-label="Search platform"
-          className="w-24 placeholder:text-black-20 text-sm font-normal leading-5 selection:bg-black-40 selection:text-black"
+          className="w-24 placeholder:text-black-20 text-sm font-normal leading-5 selection:bg-black-40 selection:text-black-5"
         />
         <InputGroupAddon>
           <Icons.search aria-hidden="true" className="w-4 h-4 size-full text-black-20" />
         </InputGroupAddon>
-        <InputGroupAddon align="inline-end">
-          <InputGroupText
-            aria-hidden="true"
-            className="text-black-20 text-sm font-normal leading-5"
-          >
-            ⌘/
-          </InputGroupText>
-        </InputGroupAddon>
+        {shortcutKey && (
+          <InputGroupAddon align="inline-end">
+            <InputGroupText
+              aria-hidden="true"
+              className="text-black-20 text-sm font-normal leading-5 space-y-3"
+            >
+              {shortcutKey
+                .replace('cmd', '⌘')
+                .replace('ctrl', '⌃')
+                .replace('alt', '⌥')
+                .toUpperCase()}
+            </InputGroupText>
+          </InputGroupAddon>
+        )}
       </InputGroup>
     </form>
   );
