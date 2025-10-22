@@ -3,11 +3,13 @@ import {
   KpiCardProps,
   LineChartData,
   NotificationsProps,
+  OrdersProps,
   ProjectionData,
   projectionsBarChartData,
   sampleCityRevenue,
   sampleKPIs,
   sampleNotifications,
+  sampleOrderList,
   sampleRevenuueData,
   sampleTopProducts,
   sampleTotalSales,
@@ -211,6 +213,28 @@ export const useGetTotalSales = () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 550));
         setData(sampleTotalSales);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { loading, data };
+};
+
+// mock data simulation for orders
+export const useGetMockOrders = () => {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<OrdersProps[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 400));
+        setData(sampleOrderList);
       } catch (error) {
         console.error(error);
       } finally {

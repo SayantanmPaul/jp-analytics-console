@@ -75,6 +75,26 @@ export interface TotalSalesProps {
   fill: string;
 }
 
+export enum OrderStatus {
+  IN_PROGRESS = 'In Progress',
+  COMPLETE = 'Complete',
+  PENDING = 'Pending',
+  APPROVED = 'Approved',
+  REJECTED = 'Rejected',
+}
+
+export interface OrdersProps {
+  id: string;
+  user: {
+    avatar: string;
+    name: string;
+  };
+  project: string;
+  address: string;
+  date: string;
+  status: OrderStatus;
+}
+
 export const sampleNotifications: NotificationsProps[] = [
   {
     category: 'bug',
@@ -212,5 +232,448 @@ export const sampleTotalSales: TotalSalesProps[] = [
     name: 'Sponsored',
     value: 154.02,
     fill: 'var(--chart-2)',
+  },
+];
+
+export const sampleOrderList: OrdersProps[] = [
+  {
+    id: '#CM9801',
+    user: {
+      name: 'Natali Craig',
+      avatar: User6.src,
+    },
+    project: 'Landing Page',
+    address: 'Meadow Lane Oakland',
+    date: 'Just now',
+    status: OrderStatus.IN_PROGRESS,
+  },
+  {
+    id: '#CM9802',
+    user: {
+      name: 'Kate Morrison',
+      avatar: User10.src,
+    },
+    project: 'CRM Admin pages',
+    address: 'Larry San Francisco',
+    date: 'A minute ago',
+    status: OrderStatus.COMPLETE,
+  },
+  {
+    id: '#CM9803',
+    user: {
+      name: 'Drew Cano',
+      avatar: User7.src,
+    },
+    project: 'Client Project',
+    address: 'Bagwell Avenue Ocala',
+    date: '1 hour ago',
+    status: OrderStatus.PENDING,
+  },
+  {
+    id: '#CM9804',
+    user: {
+      name: 'Orlando Diggs',
+      avatar: User8.src,
+    },
+    project: 'Admin Dashboard',
+    address: 'Washburn Baton Rouge',
+    date: 'Yesterday',
+    status: OrderStatus.APPROVED,
+  },
+  {
+    id: '#CM9805',
+    user: {
+      name: 'Andi Lane',
+      avatar: User9.src,
+    },
+    project: 'App Landing Page',
+    address: 'Nest Lane Olivette',
+    date: 'Feb 2, 2023',
+    status: OrderStatus.REJECTED,
+  },
+  {
+    id: '#CM9806',
+    user: {
+      name: 'Natali Craig',
+      avatar: User6.src,
+    },
+    project: 'Landing Page',
+    address: 'Meadow Lane Oakland',
+    date: 'Just now',
+    status: OrderStatus.IN_PROGRESS,
+  },
+  {
+    id: '#CM9807',
+    user: {
+      name: 'Kate Morrison',
+      avatar: User10.src,
+    },
+    project: 'CRM Admin pages',
+    address: 'Larry San Francisco',
+    date: 'A minute ago',
+    status: OrderStatus.COMPLETE,
+  },
+  {
+    id: '#CM9808',
+    user: {
+      name: 'Drew Cano',
+      avatar: User7.src,
+    },
+    project: 'Client Project',
+    address: 'Bagwell Avenue Ocala',
+    date: '1 hour ago',
+    status: OrderStatus.PENDING,
+  },
+  {
+    id: '#CM9809',
+    user: {
+      name: 'Orlando Diggs',
+      avatar: User8.src,
+    },
+    project: 'Admin Dashboard',
+    address: 'Washburn Baton Rouge',
+    date: 'Yesterday',
+    status: OrderStatus.APPROVED,
+  },
+  {
+    id: '#CM9810',
+    user: {
+      name: 'Andi Lane',
+      avatar: User9.src,
+    },
+    project: 'App Landing Page',
+    address: 'Nest Lane Olivette',
+    date: 'Feb 2, 2023',
+    status: OrderStatus.REJECTED,
+  },
+  {
+    id: '#CM9811',
+    user: {
+      name: 'Liam Foster',
+      avatar: User1.src,
+    },
+    project: 'E-commerce View',
+    address: 'Hilltop Drive Seattle',
+    date: '2 hours ago',
+    status: OrderStatus.IN_PROGRESS,
+  },
+  {
+    id: '#CM9812',
+    user: {
+      name: 'Sophia Bell',
+      avatar: User2.src,
+    },
+    project: 'Portfolio Website',
+    address: 'Broadway Avenue Dallas',
+    date: '3 hours ago',
+    status: OrderStatus.PENDING,
+  },
+  {
+    id: '#CM9813',
+    user: {
+      name: 'Noah Blake',
+      avatar: User3.src,
+    },
+    project: 'Marketing Campaign',
+    address: 'Sunset Blvd Los Angeles',
+    date: 'Today',
+    status: OrderStatus.COMPLETE,
+  },
+  {
+    id: '#CM9814',
+    user: {
+      name: 'Emma Clarke',
+      avatar: User4.src,
+    },
+    project: 'Mobile App UI',
+    address: 'Maple Street Denver',
+    date: 'Oct 20, 2025',
+    status: OrderStatus.REJECTED,
+  },
+  {
+    id: '#CM9815',
+    user: {
+      name: 'Lucas Knight',
+      avatar: User5.src,
+    },
+    project: 'Analytics Dashboard',
+    address: 'Pine Avenue Austin',
+    date: 'Last week',
+    status: OrderStatus.APPROVED,
+  },
+  {
+    id: '#CM9816',
+    user: {
+      name: 'Chloe Harper',
+      avatar: User2.src,
+    },
+    project: 'Social Media',
+    address: 'Bay Street Toronto',
+    date: 'Oct 19, 2025',
+    status: OrderStatus.COMPLETE,
+  },
+  {
+    id: '#CM9817',
+    user: {
+      name: 'Mason Hill',
+      avatar: User3.src,
+    },
+    project: 'React Native App',
+    address: 'Cedar Road Atlanta',
+    date: '4 hours ago',
+    status: OrderStatus.IN_PROGRESS,
+  },
+  {
+    id: '#CM9818',
+    user: {
+      name: 'Ava Simmons',
+      avatar: User4.src,
+    },
+    project: 'Event Management',
+    address: 'Willow Lane Chicago',
+    date: '3 days ago',
+    status: OrderStatus.APPROVED,
+  },
+  {
+    id: '#CM9819',
+    user: {
+      name: 'Ethan Wright',
+      avatar: User5.src,
+    },
+    project: 'Booking Platform',
+    address: 'Ashwood Drive Phoenix',
+    date: 'Last month',
+    status: OrderStatus.REJECTED,
+  },
+  {
+    id: '#CM9820',
+    user: {
+      name: 'Isabella Green',
+      avatar: User1.src,
+    },
+    project: 'Finance Tracker',
+    address: 'Elm Street Miami',
+    date: '2 days ago',
+    status: OrderStatus.PENDING,
+  },
+  {
+    id: '#CM9821',
+    user: {
+      name: 'Mila Thompson',
+      avatar: User1.src,
+    },
+    project: 'Travel Blog Design',
+    address: 'Ocean Drive Miami',
+    date: '2 days ago',
+    status: OrderStatus.COMPLETE,
+  },
+  {
+    id: '#CM9822',
+    user: {
+      name: 'Jackson Lee',
+      avatar: User2.src,
+    },
+    project: 'Fitness App UI',
+    address: 'King Street Toronto',
+    date: '5 minutes ago',
+    status: OrderStatus.IN_PROGRESS,
+  },
+  {
+    id: '#CM9823',
+    user: {
+      name: 'Scarlett Evans',
+      avatar: User3.src,
+    },
+    project: 'Real Estate Platform',
+    address: 'Baker Street London',
+    date: 'Oct 15, 2025',
+    status: OrderStatus.APPROVED,
+  },
+  {
+    id: '#CM9824',
+    user: {
+      name: 'Elijah Brooks',
+      avatar: User4.src,
+    },
+    project: 'Landing Page',
+    address: 'Fremont Street Vegas',
+    date: '1 week ago',
+    status: OrderStatus.PENDING,
+  },
+  {
+    id: '#CM9825',
+    user: {
+      name: 'Aria Mitchell',
+      avatar: User5.src,
+    },
+    project: 'Resume Builder App',
+    address: 'Park Avenue Manhattan',
+    date: 'Just now',
+    status: OrderStatus.IN_PROGRESS,
+  },
+  {
+    id: '#CM9826',
+    user: {
+      name: 'Benjamin Carter',
+      avatar: User6.src,
+    },
+    project: 'News Website',
+    address: 'Jefferson Street Dallas',
+    date: 'Yesterday',
+    status: OrderStatus.REJECTED,
+  },
+  {
+    id: '#CM9827',
+    user: {
+      name: 'Layla Scott',
+      avatar: User7.src,
+    },
+    project: 'Job Portal UI',
+    address: 'Sunrise Blvd Fort Lauderdale',
+    date: 'Oct 21, 2025',
+    status: OrderStatus.COMPLETE,
+  },
+  {
+    id: '#CM9828',
+    user: {
+      name: 'Logan Morris',
+      avatar: User8.src,
+    },
+    project: 'Restaurant Menu App',
+    address: 'Mulberry Street New York',
+    date: '3 hours ago',
+    status: OrderStatus.APPROVED,
+  },
+  {
+    id: '#CM9829',
+    user: {
+      name: 'Zoe Ramirez',
+      avatar: User9.src,
+    },
+    project: 'Inventory System',
+    address: 'Chestnut Street Philadelphia',
+    date: 'Last month',
+    status: OrderStatus.REJECTED,
+  },
+  {
+    id: '#CM9830',
+    user: {
+      name: 'Carter Hughes',
+      avatar: User10.src,
+    },
+    project: 'Freelancer Dashboard',
+    address: 'Beacon Street Boston',
+    date: '5 days ago',
+    status: OrderStatus.PENDING,
+  },
+  {
+    id: '#CM9831',
+    user: {
+      name: 'Sophie Bennett',
+      avatar: User11.src,
+    },
+    project: 'Online Course Platform',
+    address: 'Lexington Avenue NYC',
+    date: 'Today',
+    status: OrderStatus.IN_PROGRESS,
+  },
+  {
+    id: '#CM9832',
+    user: {
+      name: 'Henry Ward',
+      avatar: User1.src,
+    },
+    project: 'Interior Design Portfolio',
+    address: 'Riverwalk San Antonio',
+    date: '2 hours ago',
+    status: OrderStatus.APPROVED,
+  },
+  {
+    id: '#CM9833',
+    user: {
+      name: 'Luna Morgan',
+      avatar: User2.src,
+    },
+    project: 'Pet Adoption App',
+    address: 'Maple Drive Portland',
+    date: '1 hour ago',
+    status: OrderStatus.COMPLETE,
+  },
+  {
+    id: '#CM9834',
+    user: {
+      name: 'Sebastian Rivera',
+      avatar: User3.src,
+    },
+    project: 'Food Delivery Service',
+    address: 'Main Street Salt Lake City',
+    date: 'Oct 17, 2025',
+    status: OrderStatus.REJECTED,
+  },
+  {
+    id: '#CM9835',
+    user: {
+      name: 'Nora Wallace',
+      avatar: User4.src,
+    },
+    project: 'Blog CMS',
+    address: 'Greenwood Avenue Seattle',
+    date: 'A minute ago',
+    status: OrderStatus.IN_PROGRESS,
+  },
+  {
+    id: '#CM9836',
+    user: {
+      name: 'Grayson Reed',
+      avatar: User5.src,
+    },
+    project: 'SaaS Billing System',
+    address: 'Vine Street Cincinnati',
+    date: 'Yesterday',
+    status: OrderStatus.APPROVED,
+  },
+  {
+    id: '#CM9837',
+    user: {
+      name: 'Penelope James',
+      avatar: User6.src,
+    },
+    project: 'HR Onboarding App',
+    address: 'Highland Road Baton Rouge',
+    date: 'Oct 20, 2025',
+    status: OrderStatus.PENDING,
+  },
+  {
+    id: '#CM9838',
+    user: {
+      name: 'Mateo Griffin',
+      avatar: User7.src,
+    },
+    project: 'Gaming Landing Page',
+    address: '5th Avenue Brooklyn',
+    date: 'Last week',
+    status: OrderStatus.REJECTED,
+  },
+  {
+    id: '#CM9839',
+    user: {
+      name: 'Hazel Rivera',
+      avatar: User8.src,
+    },
+    project: 'Music Streaming UI',
+    address: 'Elmwood Drive Nashville',
+    date: '3 days ago',
+    status: OrderStatus.COMPLETE,
+  },
+  {
+    id: '#CM9840',
+    user: {
+      name: 'Levi Simmons',
+      avatar: User9.src,
+    },
+    project: 'Nonprofit Website',
+    address: 'Willow Grove Houston',
+    date: 'Oct 10, 2025',
+    status: OrderStatus.APPROVED,
   },
 ];

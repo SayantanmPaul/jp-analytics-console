@@ -27,7 +27,13 @@ import Broadcast from './notifcation-category/Broadcast.svg';
 import BugBeetle from './notifcation-category/BugBeetle.svg';
 import User from './notifcation-category/User.svg';
 
-
+// order list icons
+import Add from './table/Add.svg';
+import ArrowsDownUp from './table/ArrowsDownUp.svg';
+import CalendarBlank from './table/CalendarBlank.svg';
+import ThreeDots from './table/DotsThreeOutlineVertical.svg';
+import FunnelSimple from './table/FunnelSimple.svg';
+import Checkbox from './table/Subtract.svg';
 
 export const Icons = {
   bookOpen: BookOpen,
@@ -54,4 +60,11 @@ export const Icons = {
   broadcast: Broadcast,
 
   arrowRise: ArrowRise,
+
+  add: Add,
+  arrowsDownUp: ArrowsDownUp,
+  calendarBlank: CalendarBlank,
+  funnelSimple: FunnelSimple,
+  threeDots: ThreeDots,
+  checkbox: Checkbox,
 };

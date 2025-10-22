@@ -34,7 +34,7 @@ const Dashboard = () => {
   }, [isMobileView, setRightSidebarOpen, setLeftSidebarOpen]);
 
   return (
-    <div className="flex flex-col items-start justify-start min-h-screen gap-4 w-full h-full p-7">
+    <div className="flex flex-col items-start justify-start gap-4 w-full h-full p-7">
       <DashboardHeader label="eCommerce" />
 
       <div className="grid grid-cols-1 gap-7 w-full lg:grid-cols-4">
