@@ -34,20 +34,20 @@ const KpiCard = ({
       aria-label={`${label} KPI`}
     >
       <div className="flex flex-col space-y-2 lg:p-6 p-4  w-full">
-        <h3 className={`text-sm leading-5 space-y-3 font-semibold  w-full`}>{label}</h3>
+        <h3 className={`text-sm leading-5 space-y-3 font-semibold w-full`}>{label}</h3>
         <div className="flex items-center w-full lg:gap-7 gap-2 justify-between">
           <NumberTicker
             value={value}
             startValue={animationStartValue || 0}
             decimalPlaces={decimalPlace || 0}
-            className={`text-2xl font-semibold leading-9 tracking-tighter space-y-[18px] whitespace-pre-wrap text-primary  ${!color ? '' : ' dark:text-primary-foreground'}`}
+            className={`lg:text-2xl text-xl font-semibold leading-9 tracking-tighter space-y-[18px] whitespace-pre-wrap text-primary  ${!color ? '' : ' dark:text-primary-foreground'}`}
           />
           <span className="flex items-center gap-1">
-            <p className="text-sm font-normal leading-5 space-y-2 ">{growth}</p>
+            <p className="lg:text-sm text-xs font-normal leading-5 space-y-2 ">{growth}</p>
             {growth.toString().includes('+') ? (
-              <Icons.arrowRise className=" w-4 h-4 size-full " aria-hidden />
+              <Icons.arrowRise className="lg:size-4 size-3" aria-hidden />
             ) : (
-              <Icons.arrowRise className=" w-4 h-4 size-full  rotate-180" aria-hidden />
+              <Icons.arrowRise className="lg:size-4 size-3 rotate-180" aria-hidden />
             )}
           </span>
         </div>

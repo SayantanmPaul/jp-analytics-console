@@ -26,7 +26,7 @@ const RevenueForecastChart = () => {
 
   return (
     <figure
-      className="w-full h-full rounded-2xl bg-card flex flex-col space-y-4 p-6"
+      className="w-full h-full rounded-2xl bg-card flex flex-col lg:space-y-4  space-y-6 p-6"
       aria-labelledby="chart-heading"
     >
       <Header
@@ -98,7 +98,7 @@ const RevenueForecastChart = () => {
               type="natural"
               stroke="var(--chart-1)"
               strokeWidth={3}
-              filter="url(#glow)"
+              // filter="url(#glow)"
               dot={false}
             />
 
@@ -158,11 +158,11 @@ const Header = ({
   isLoading: boolean;
 }) => {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex lg:flex-row flex-col lg:items-center items-baseline lg:gap-4 gap-2">
       <h3 id="chart-heading" className="text-sm font-semibold leading-5 text-primary space-y-3">
         Revenue
       </h3>
-      <p className="text-sm font-normal leading-5 text-black-20 space-y-3">|</p>
+      <p className="text-sm font-normal leading-5 text-black-20 space-y-3 hidden lg:block">|</p>
       <WeekRevenue
         label="Current Week"
         amount={currentWeekRevenueAmount}
@@ -191,11 +191,11 @@ const WeekRevenue = ({
   colorClass: string;
   isLoading: boolean;
 }) => (
-  <div className="flex items-center py-0.5 pl-1 pr-2">
+  <div className="flex items-center py-0.5 lg:pl-1 pr-2">
     <span className="w-4 h-4 flex items-center justify-center" aria-hidden="true">
       <span className={`w-1.5 h-1.5 rounded-full ${colorClass}`} />
     </span>
-    <span className="text-primary text-xs leading-5 space-x-2 font-normal whitespace-nowrap flex items-center">
+    <span className="text-primary text-xs leading-5 space-x-2 font-normal whitespace-nowrap flex items-start">
       {label}{' '}
       {isLoading ? (
         <Skeleton className="w-12 h-4 inline-block ml-1.5" />

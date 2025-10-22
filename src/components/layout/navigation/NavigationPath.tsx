@@ -40,7 +40,7 @@ const NavigationPath = () => {
         ];
 
   return (
-    <Breadcrumb aria-label="Breadcrumb">
+    <Breadcrumb aria-label="Breadcrumb" className="hidden lg:block md:block">
       <BreadcrumbList>
         {breadCrumps.map((item, i) => (
           <React.Fragment key={i}>

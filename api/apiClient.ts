@@ -233,7 +233,7 @@ export const useGetMockOrders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await new Promise((resolve) => setTimeout(resolve, 400));
+        await new Promise((resolve) => setTimeout(resolve, 600));
         setData(sampleOrderList);
       } catch (error) {
         console.error(error);

@@ -11,7 +11,9 @@ const Contacts = ({ data, isLoading }: { data: User[]; isLoading: boolean }) => 
         ))
       ) : data.length > 0 ? (
         data.map((user, i) => (
-          <UserAvatar key={`${user.name}- ${i}`} user={{ image: user.avatar, name: user.name }} />
+          <span key={`${user.name}- ${i}`} className="cursor-pointer w-full">
+            <UserAvatar user={{ image: user.avatar, name: user.name }} />
+          </span>
         ))
       ) : (
         <div className="text-sm text-black-40 italic p-2" role="status">

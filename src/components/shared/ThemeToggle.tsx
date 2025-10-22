@@ -2,19 +2,12 @@
 
 import { Icons } from '@/assets/icons';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from '../ui/button';
 
 const ThemeToggle = () => {
-  const [mounted, setMounted] = useState(false);
   const { setTheme, resolvedTheme, theme } = useTheme();
   const [isAnimating, setIsAnimating] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
 
   const handleToggle = () => {
     startThemeTransition(400);

@@ -71,7 +71,7 @@ const TopSellingProductsTable = () => {
                   <TableRow key={index} className="h-10">
                     <TableCell
                       scope="row"
-                      className="lg:max-w-56 max-w-20 text-xs leading-5 font-normal"
+                      className="lg:max-w-56 max-w-32 text-xs leading-5 font-normal"
                     >
                       {product.product_name}
                     </TableCell>

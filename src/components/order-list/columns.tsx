@@ -19,8 +19,9 @@ export const orderListColumns: ColumnDef<OrdersProps>[] = [
     enableSorting: false,
     enableHiding: false,
     enableColumnFilter: false,
+    size: 24,
     header: ({ table }) => (
-      <span className="px-1">
+      <span className="px-1 w-6">
         <Checkbox
           aria-label="Select all"
           checked={table.getIsAllPageRowsSelected()}
@@ -29,7 +30,7 @@ export const orderListColumns: ColumnDef<OrdersProps>[] = [
       </span>
     ),
     cell: ({ row }) => (
-      <span className="px-1">
+      <span className="px-1 w-6">
         <Checkbox
           aria-label="Select row"
           checked={row.getIsSelected()}
@@ -41,8 +42,9 @@ export const orderListColumns: ColumnDef<OrdersProps>[] = [
   },
   {
     accessorKey: 'id',
-    header: () => <span className="text-muted-foreground font-normal">Order ID</span>,
-    cell: ({ row }) => <span>{row.original.id}</span>,
+    size: 100,
+    header: () => <span className="text-muted-foreground font-normal w-[100px]">Order ID</span>,
+    cell: ({ row }) => <span className="w-[100px]">{row.original.id}</span>,
 
     sortingFn: (rowA, rowB, columnId) => {
       const a = Number(rowA.getValue(columnId));
@@ -62,7 +64,7 @@ export const orderListColumns: ColumnDef<OrdersProps>[] = [
       const { avatar, name } = row.original.user;
       return (
         <div className="">
-          <UserAvatar user={{ image: avatar, name }} />
+          <UserAvatar user={{ image: avatar, name }} className="text-xs leading-5 space-y-2" />
         </div>
       );
     },
@@ -83,6 +85,7 @@ export const orderListColumns: ColumnDef<OrdersProps>[] = [
   },
   {
     accessorKey: 'address',
+    size: 270,
     header: () => <p className="text-muted-foreground font-normal">Address</p>,
     accessorFn: (row) => row.address,
     enableGlobalFilter: true,
@@ -110,6 +113,7 @@ export const orderListColumns: ColumnDef<OrdersProps>[] = [
   },
   {
     accessorKey: 'status',
+    size: 110,
     header: () => <p className="text-muted-foreground font-normal">Status</p>,
     accessorFn: (row) => row.status,
     enableGlobalFilter: true,
@@ -122,6 +126,7 @@ export const orderListColumns: ColumnDef<OrdersProps>[] = [
   },
   {
     accessorKey: 'action',
+    size: 48,
     header: '',
     cell: ({ row }) => {
       const selected = row.getIsSelected();
@@ -142,6 +147,5 @@ export const orderListColumns: ColumnDef<OrdersProps>[] = [
         </DropdownMenu>
       );
     },
-    maxSize: 20,
   },
 ];

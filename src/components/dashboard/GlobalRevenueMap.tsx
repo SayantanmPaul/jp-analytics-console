@@ -10,7 +10,7 @@ const GlobalRevenueMap = () => {
   const { data: sampleCityRevenue, loading } = useGetCityRevenueData();
   return (
     <figure
-      className="flex flex-col space-y-4 lg:p-6 p-4 rounded-lg bg-card w-full"
+      className="flex flex-col space-y-4 p-6 rounded-lg bg-card w-full"
       aria-labelledby="revenue-map-heading"
     >
       <h3
@@ -25,7 +25,7 @@ const GlobalRevenueMap = () => {
         </div>
       ) : (
         <ComposableMap
-          className="w-auto h-[82px]"
+          className="w-auto lg:h-[82px] h-36"
           projection="geoMercator"
           projectionConfig={{ scale: 200, center: [0, 36] }}
           aria-label="World map with revenue"
@@ -62,7 +62,7 @@ const GlobalRevenueMap = () => {
                 </TooltipTrigger>
                 <TooltipContent
                   side="top"
-                  className="text-xs leading-5 text-primary-foreground dark:text-primary dark:bg-[#1C1C1CCC] shadow-2xl backdrop-blur-sm"
+                  className="text-xs leading-5 text-primary-foreground dark:text-primary bg-[#1C1C1CCC] shadow-2xl backdrop-blur-sm"
                 >
                   <p className="font-semibold">{city.city}</p>
                   <p>{city.revenue}K Revenue</p>

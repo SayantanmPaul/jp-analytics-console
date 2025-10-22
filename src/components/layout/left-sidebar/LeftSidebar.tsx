@@ -58,7 +58,7 @@ const DASHBOARD_NAVIGATION: NavigationGroupsProps = {
         {
           label: 'Overview',
           childOf: 'eCommerce',
-          routeHref: '#',
+          routeHref: '/',
         },
         {
           label: 'Order List',

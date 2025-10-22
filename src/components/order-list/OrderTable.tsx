@@ -106,7 +106,7 @@ export function OrderDataTable<TData, TValue>({
         <SearchBar
           initialValue={globalFilter}
           onSearchChange={setGlobalFilter}
-          containerClass="focus-within:border-black-10 bg-muted dark:bg-[#1C1C1C66]"
+          containerClass="focus-within:border-black-10 border-transparent border bg-muted dark:bg-[#1C1C1C66]"
         />
       </div>
       <Table>
@@ -114,7 +114,11 @@ export function OrderDataTable<TData, TValue>({
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <TableHead scope="col" key={header.id} className="px-3 py-2">
+                <TableHead
+                  scope="col"
+                  key={header.id}
+                  className="px-3 py-2 text-xs leading-5 space-y-2"
+                >
                   {header.isPlaceholder
                     ? null
                     : flexRender(header.column.columnDef.header, header.getContext())}
@@ -140,7 +144,7 @@ export function OrderDataTable<TData, TValue>({
                 className="rounded-lg overflow-hidden border-b border-black-5"
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="pl-3 py-2">
+                  <TableCell key={cell.id} className="pl-3 text-xs leading-5 space-y-2">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
@@ -269,7 +273,7 @@ const FilterDropDown = ({
 const PaginationSection = ({ table }: { table: TanTable<any> }) => {
   return (
     <Pagination className="justify-end">
-      <PaginationContent className="flex items-center space-x-2">
+      <PaginationContent className="flex items-center lg:space-x-2 space-x-1">
         <PaginationItem>
           <PaginationPrevious
             onClick={() => table.previousPage()}
@@ -285,7 +289,7 @@ const PaginationSection = ({ table }: { table: TanTable<any> }) => {
             <PaginationLink
               onClick={() => table.setPageIndex(index)}
               isActive={table.getState().pagination.pageIndex === index}
-              className="cursor-pointer border-none text-sm font-normal leading-5 space-y-3"
+              className="cursor-pointer border-none lg:text-sm text-xs font-normal leading-5 space-y-3"
             >
               {index + 1}
             </PaginationLink>

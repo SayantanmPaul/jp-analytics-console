@@ -1,12 +1,8 @@
 'use client';
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from '@/components/ui/chart';
+import { ChartConfig, ChartContainer, ChartTooltip } from '@/components/ui/chart';
 import { ProjectionData } from '@/data/sample-data';
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, TooltipProps, XAxis, YAxis } from 'recharts';
+import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
 const chartConfig = {
   actual: {
@@ -23,6 +19,12 @@ interface ProjectionsChartProps {
   data: ProjectionData[];
 }
 
+interface CustomTooltipProps extends TooltipProps<ValueType, NameType> {
+  label?: string;
+  indicator?: 'line' | 'dashed';
+  hideLabel?: boolean;
+}
+
 const ProjectionsChartCard = ({ data }: ProjectionsChartProps) => {
   const MAX_VALUE = 30;
 
@@ -34,7 +36,7 @@ const ProjectionsChartCard = ({ data }: ProjectionsChartProps) => {
 
   return (
     <figure
-      className="flex flex-col gap-4 lg:p-6 p-4 rounded-lg bg-card w-full max-w-full max-h-[252px] h-full"
+      className="flex flex-col lg:gap-4 gap-6 p-6 rounded-lg bg-card w-full max-w-full max-h-[252px] h-full"
       aria-labelledby="proj-heading"
     >
       <h3
@@ -76,7 +78,7 @@ const ProjectionsChartCard = ({ data }: ProjectionsChartProps) => {
             width={44}
           />
 
-          <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+          <ChartTooltip content={<CustomTooltipContent hideLabel />} />
           <Bar
             dataKey="actual"
             stackId="a"
@@ -98,3 +100,27 @@ const ProjectionsChartCard = ({ data }: ProjectionsChartProps) => {
 };
 
 export default ProjectionsChartCard;
+
+const CustomTooltipContent = ({ payload }: CustomTooltipProps) => {
+  if (!payload || payload.length === 0) return null;
+
+  return (
+    <div
+      aria-live="polite"
+      role="tooltip"
+      className=" bg-[#1C1C1CCC] shadow-xl py-1 px-3 rounded-lg backdrop-blur-sm space-y-1 dark:text-primary text-primary-foreground"
+    >
+      {payload.map((entry, index) => (
+        <div key={`item-${index}`} className="tooltip-item flex items-center space-x-2">
+          <span
+            className="tooltip-indicator w-3 h-3 rounded"
+            style={{ backgroundColor: entry.color }}
+          />
+          <span className="text-xs">
+            {entry.name || entry.dataKey}: {entry.value}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+};
