@@ -97,7 +97,10 @@ export function OrderDataTable<TData, TValue>({
     <div className="w-full space-y-3">
       <div className="w-full p-2 bg-card rounded-md flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <button className="cursor-pointer hover:bg-black-5 rounded-sm duration-200 ease-in-out size-7">
+          <button
+            aria-label="Add new order"
+            className="cursor-pointer hover:bg-black-5 rounded-sm duration-200 ease-in-out size-7"
+          >
             <Icons.add className="w-5 h-5 size-full m-1" />
           </button>
           <FilterDropDown table={table} globalFilter={globalFilter} />
@@ -131,7 +134,11 @@ export function OrderDataTable<TData, TValue>({
           {isLoading ? (
             <TableRow>
               <TableCell colSpan={columns.length}>
-                <div className="flex flex-col gap-2 items-center justify-center h-[336px]">
+                <div
+                  role="status"
+                  aria-live="polite"
+                  className="flex flex-col gap-2 items-center justify-center h-[336px]"
+                >
                   <span className="text-sm text-muted-foreground">Loading data…</span>
                 </div>
               </TableCell>
@@ -152,8 +159,10 @@ export function OrderDataTable<TData, TValue>({
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-12 text-center">
-                No results.
+              <TableCell colSpan={columns.length} className="h-12">
+                <div role="status" className="text-center w-full">
+                  No results.
+                </div>
               </TableCell>
             </TableRow>
           )}
@@ -232,7 +241,10 @@ const FilterDropDown = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="border-none outline-0">
-        <button className="cursor-pointer hover:bg-black-5 rounded-sm duration-200 ease-in-out size-7 relative">
+        <button
+          aria-label="Add filters"
+          className="cursor-pointer hover:bg-black-5 rounded-sm duration-200 ease-in-out size-7 relative"
+        >
           <Icons.funnelSimple className="w-5 h-5 size-full m-1" />
           {hasActiveFilters && (
             <span className="absolute -top-1 -right-1">
@@ -248,22 +260,25 @@ const FilterDropDown = ({
         className="w-36 bg-background border-secondary hover:cursor-pointer"
       >
         <DropdownMenuLabel className="font-semibold">Select status</DropdownMenuLabel>
-        {FILTER_OPTIONS.map((status) => (
-          <DropdownMenuCheckboxItem
-            key={status}
-            className="capitalize"
-            checked={activeStatusFilter.includes(status)}
-            onCheckedChange={(checked) => {
-              const updated = checked
-                ? [...activeStatusFilter, status]
-                : activeStatusFilter.filter((s) => s !== status);
+        <fieldset>
+          <legend className="sr-only">Filter by status</legend>
+          {FILTER_OPTIONS.map((status) => (
+            <DropdownMenuCheckboxItem
+              key={status}
+              className="capitalize"
+              checked={activeStatusFilter.includes(status)}
+              onCheckedChange={(checked) => {
+                const updated = checked
+                  ? [...activeStatusFilter, status]
+                  : activeStatusFilter.filter((s) => s !== status);
 
-              table.getColumn('status')?.setFilterValue(updated.length ? updated : undefined);
-            }}
-          >
-            {status}
-          </DropdownMenuCheckboxItem>
-        ))}
+                table.getColumn('status')?.setFilterValue(updated.length ? updated : undefined);
+              }}
+            >
+              {status}
+            </DropdownMenuCheckboxItem>
+          ))}
+        </fieldset>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -288,6 +303,7 @@ const PaginationSection = ({ table }: { table: TanTable<any> }) => {
           <PaginationItem key={index}>
             <PaginationLink
               onClick={() => table.setPageIndex(index)}
+              aria-current={table.getState().pagination.pageIndex === index ? 'page' : undefined}
               isActive={table.getState().pagination.pageIndex === index}
               className="cursor-pointer border-none lg:text-sm text-xs font-normal leading-5 space-y-3"
             >

@@ -13,7 +13,7 @@ export interface TabsProps {
 const TabsClipPath = ({ TABS }: TabsProps) => {
   const [activeTab, setActiveTab] = useState(TABS[0].name);
   const containerRef = useRef<HTMLDivElement>(null);
-  const activeTabElementRef = useRef(null);
+  const activeTabElementRef = useRef<HTMLButtonElement | null>(null);
 
   // update the clip path wwhen active tab change
   useEffect(() => {
@@ -40,48 +40,51 @@ const TabsClipPath = ({ TABS }: TabsProps) => {
   return (
     <div role="tablist" aria-label="Tab navigation" className="space-y-1 pb-3">
       <div className=" relative w-fit flex flex-col items-center ">
-        <ul className=" relative flex w-full justify-center gap-2">
+        {/* all tab list */}
+        <ul
+          role="tablist"
+          aria-label="Tab navigation"
+          className=" relative flex w-full justify-center gap-2"
+        >
           {TABS.map((tab) => (
-            <li key={tab.name}>
+            <li role="presentation" key={tab.name}>
               <button
-                ref={activeTab === tab.name ? activeTabElementRef : null}
-                data-tab={tab.name}
-                onClick={() => {
-                  setActiveTab(tab.name);
-                }}
                 role="tab"
-                className={cn(
-                  'flex text-sm leading-5 text-black-20 py-1 px-2',
-                  activeTab === tab.name && '',
-                )}
+                id={`tab-${tab.name}`}
+                aria-controls={`tabpanel-${tab.name}`}
+                aria-selected={activeTab === tab.name}
+                ref={activeTab === tab.name ? activeTabElementRef : null}
+                onClick={() => setActiveTab(tab.name)}
+                className={cn('flex text-sm leading-5 text-black-20 py-1 px-2')}
               >
                 {tab.name}
               </button>
             </li>
           ))}
         </ul>
-        <div aria-hidden className="clip-path-container" ref={containerRef}>
-          <ul className="relative flex w-full justify-center gap-2">
+        {/* Clip-path background to view active tabs */}
+        <div
+          aria-hidden="true"
+          className="clip-path-container pointer-events-none"
+          ref={containerRef}
+        >
+          <div className="relative flex w-full justify-center gap-2">
             {TABS.map((tab) => (
-              <li key={tab.name}>
-                <button
-                  data-tab={tab.name}
-                  aria-selected={activeTab === tab.name}
-                  role="tab"
-                  onClick={() => {
-                    setActiveTab(tab.name);
-                  }}
-                  className="text-sm leading-5 text-black-40 py-1 px-2 w-full"
-                  tabIndex={-1}
-                >
-                  {tab.name}
-                </button>
-              </li>
+              <div key={tab.name} className="text-sm leading-5 text-black-40 py-1 px-2 ">
+                {tab.name}
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
-      <div key={activeTab} className="w-full flex flex-1">
+      {/* Tab panel content */}
+      <div
+        key={activeTab}
+        role="tabpanel"
+        id={`tabpanel-${activeTab}`}
+        aria-labelledby={`tab-${activeTab}`}
+        className="w-full flex flex-1"
+      >
         {activeContent}
       </div>
     </div>

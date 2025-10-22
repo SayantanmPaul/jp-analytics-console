@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
 
 export interface ContextStore {
   rightSidebarOpen: boolean;
@@ -12,27 +11,19 @@ export interface ContextStore {
   setIsMobileView: (view: boolean) => void;
 }
 
-export const useContextStore = create<ContextStore>()(
-  persist(
-    (set) => ({
-      rightSidebarOpen: true,
-      setRightSidebarOpen(open) {
-        set({ rightSidebarOpen: open });
-      },
+export const useContextStore = create<ContextStore>()((set) => ({
+  rightSidebarOpen: true,
+  setRightSidebarOpen(open) {
+    set({ rightSidebarOpen: open });
+  },
 
-      leftSidebarOpen: true,
-      setLeftSidebarOpen(open) {
-        set({ leftSidebarOpen: open });
-      },
+  leftSidebarOpen: true,
+  setLeftSidebarOpen(open) {
+    set({ leftSidebarOpen: open });
+  },
 
-      isMobileView: false,
-      setIsMobileView(view) {
-        set({ isMobileView: view });
-      }
-    }),
-    {
-      name: 'context-storage',
-      storage: createJSONStorage(() => localStorage),
-    },
-  ),
-);
+  isMobileView: false,
+  setIsMobileView(view) {
+    set({ isMobileView: view });
+  },
+}));

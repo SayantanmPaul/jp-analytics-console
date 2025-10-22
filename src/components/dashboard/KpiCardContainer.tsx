@@ -34,7 +34,7 @@ const KpiCard = ({
       aria-label={`${label} KPI`}
     >
       <div className="flex flex-col space-y-2 lg:p-6 p-4  w-full">
-        <h3 className={`text-sm leading-5 space-y-3 font-semibold w-full`}>{label}</h3>
+        <h2 className={`text-sm leading-5 space-y-3 font-semibold w-full`}>{label}</h2>
         <div className="flex items-center w-full lg:gap-7 gap-2 justify-between">
           <NumberTicker
             value={value}

@@ -35,7 +35,7 @@ const GlobalRevenueMap = () => {
               geographies.map((geo) => (
                 <Geography
                   key={geo.rsmKey}
-                  geography={geo}
+                  role="presentation"
                   style={{
                     default: {
                       fill: 'var(--chart-5)',
@@ -44,6 +44,8 @@ const GlobalRevenueMap = () => {
                     },
                     hover: { fill: '#70a1d7' },
                   }}
+                  geography={geo}
+                  tabIndex={-1}
                 />
               ))
             }
