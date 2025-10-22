@@ -14,6 +14,7 @@ interface SearchInputProps {
   onSearchChange: (value: string) => void;
   shortcutKey?: string;
   containerClass?: string;
+  maxWidth?: number;
 }
 
 const SearchBar = ({
@@ -21,6 +22,7 @@ const SearchBar = ({
   onSearchChange,
   shortcutKey,
   containerClass,
+  maxWidth,
 }: SearchInputProps) => {
   const [searchValue, setSearchValue] = useState(initialValue);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -63,7 +65,8 @@ const SearchBar = ({
     <form
       role="search"
       aria-label="Platform search"
-      className="w-40"
+      className="w-full"
+      style={{ maxWidth: maxWidth ? maxWidth : 160 }}
       onSubmit={(e) => e.preventDefault()}
     >
       <InputGroup
