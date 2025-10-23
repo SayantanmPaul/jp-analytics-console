@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Analytics Console Assignment~ JP
+A modern analytics dashboard built for performance, accessibility, and developer scalability. 
 
-## Getting Started
+This project provides an implementation of an edge-to-edge, responsive React dashboard made from the provided Figma designs, with a focus on clean architecture, accessibility, and optimal performance.
 
-First, run the development server:
+### Development Flow
+
+- **Setup & Theming**: Configured global design system using Tailwind + CSS variables for color tokens and typography.
+Global layout and component spacing adjusted to achieve pixel parity with the provided Figma.
+- **State Management:** Implemented Zustand with persistent storage for UI states like sidebar open/close and viewport detection.
+- **Data Simulation**:
+  - Created a mock API layer with a custom hook that delays responses using setTimeout to simulate network latency.
+  - Enabled skeleton loading for all micro components to mimic real-world async data flow.
+- **Micro-interactions**: Used Framer Motion for sidebar transitions, chart animations, and subtle entry delays.
+- **Accessibility**:
+  - Every interactive element has a role/aria-label.
+  - Verified keyboard navigation and focus order manually.
+  - 90+ Lighthouse scores across Performance, Accessibility, Best Practices, and SEO.
+
+### Performance Optimization
+
+- **Code Splitting**:  Lazy-loaded routes and charts for faster initial load.
+- **Optimized Recharts**: Custom tooltips and axis formatting to avoid unnecessary re-renders.
+- **Reduced Layout Shift**:  Skeleton components ensure visual stability during loading.
+- **UI Context**: Zustand’s global context store reduces unnecessary re-renders across components.
+
+##  Setup the project locally
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/en/) (v20 or higher recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/) or [pnpm](https://pnpm.io/)
+
+### Project Structure
+
+```
+jp-analytics-console/
+├── api/                  # API client functions
+├── src/
+│   ├── app/              # Main application pages, layouts, and routes
+|   |-- assets/           # Local fonts, images, and icons svgs
+│   ├── components/       
+│   │   ├── dashboard/    # dashboard components
+│   │   ├── layout/       # right/left sidebar, navbar components
+│   │   ├── order-list/   # orders page components
+│   │   ├── shared/       # most used components across the app
+│   │   ├── ui/           # Core UI elements (buttons, cards, etc.)
+│   ├── data/             # contains sample mock data and type
+│   ├── lib/              # utils, queryprovider, and queries
+│   ├── store/            # Zustand store (global state)
+│   └── lib/              # helper functions and Zustand context store
+└──...
+```
+
+
+### Installation
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/SayantanmPaul/jp-analytics-console
+    ```
+2.  Navigate to the project directory:
+    ```bash
+    cd juspay-analytics-console
+    ```
+3.  Install dependencies:
+    ```bash
+    npm install
+    ```
+### Running the Development Server
+
+To start the development server, run:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
